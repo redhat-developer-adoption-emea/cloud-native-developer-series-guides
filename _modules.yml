@@ -13,6 +13,9 @@ modules:
   create-catalog-che:
     name: Create Catalog Service
 
+  create-base-resources:
+    name: Create Base Resources
+
   deploy-inventory:
     name: Deploy Inventory Service
 
