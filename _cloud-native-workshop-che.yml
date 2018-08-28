@@ -1,5 +1,5 @@
 id: "cloudnative"
-name: "OpenShift Cloud-Native Workshop"
+name: "Cloud Native Developer Series Workshop"
 
 content:
   url: https://raw.githubusercontent.com/openshift-labs/cloud-native-guides/ocp-3.10
@@ -29,14 +29,22 @@ vars:
   
 modules:
   activate:
+  - introduction
   - getting-started-che
-  - wildfly-swarm-che
-  - spring-boot-che
-  - vertx-che
-  - nodejs
-  - health
-  - fault-tolerance-che
-  - app-config
-  - continuous-delivery-che
+  
+  - create-catalog-che
+  - deploy-inventory
+  - deploy-gateway
+  - deploy-webui
+
+  #- spring-boot-che # add commands from module app-config and some other commands related to POD management
+  #- wildfly-swarm-che
+  #- vertx-che
+  #- nodejs
+
+  #- health
+  #- fault-tolerance-che
+  #- app-config
+  #- continuous-delivery-che
   - debug-che
   - env-info

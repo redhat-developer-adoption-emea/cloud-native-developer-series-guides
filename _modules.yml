@@ -6,6 +6,22 @@ modules:
     name: Getting Started
   getting-started-che:
     name: Getting Started
+
+  introduction:
+    name: Introduction
+
+  create-catalog-che:
+    name: Create Catalog Service
+
+  deploy-inventory:
+    name: Deploy Inventory Service
+
+  deploy-gateway:
+    name: Deploy Gateway Service
+
+  deploy-webui:
+    name: Deploy Web UI
+
   spring-boot:
     name: Microservices with Spring Boot
   spring-boot-che:

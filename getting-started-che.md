@@ -1,4 +1,4 @@
-## Getting Started with OpenShift
+## Getting Started with OpenShift!!!
 
 In this lab you will get familiar with the OpenShift CLI and OpenShift Web Console 
 and get ready for the Cloud Native Roadshow labs.
@@ -28,6 +28,8 @@ First, you need to register as a user. Register and choose the same username and
 your OpenShift credentials.
 
 ![Eclipse Che - Register]({% image_path bootstrap-che-register.png %}){:width="700px"}
+
+![Eclipse Che - Register]({% image_path bootstrap-che-register.png %}){:width="500px"}
 
 Log into Eclipse Che with your user. You can now create your workspace based on a stack. A 
 stack is a template of workspace configuration. For example, it includes the programming language and tools needed

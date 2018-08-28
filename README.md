@@ -80,6 +80,6 @@ Local Lab Instructions
 $ docker run -it -p 8080:8080 \
       -v $(pwd):/app-data \
       -e CONTENT_URL_PREFIX="file:///app-data" \
-      -e WORKSHOPS_URLS="file:///app-data/_cloud-native-workshop.yml" \
+      -e WORKSHOPS_URLS="file:///app-data/_cloud-native-workshop-che.yml" \
       osevg/workshopper:latest
 ```
