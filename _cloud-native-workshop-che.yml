@@ -32,7 +32,7 @@ modules:
   - introduction
   - getting-started-che
   
-  - create-catalog-che
+  - create-catalog-che # add commands from module app-config and some other commands related to POD management
   - deploy-inventory
   - deploy-gateway
   - deploy-webui
