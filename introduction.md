@@ -1,81 +1,37 @@
 ## Introduction
 
-In this lab you will learn about Node.js and will deploy the Node.js and Angular-based 
-web front+end for the CoolStore online shop which uses the API Gateway services you deployed 
-in previous labs. 
+#### What is the Cloud Native Developer Series Workshop?
+This workshop is a series of hands-on-labs which are designed to familiarize participants with cloud-native concepts
+and give them a taste of using OpenShift and OpenShift Application Runtimes (Spring Boot, Thorntail/WildFly Swarm, Vert.x, and Node.js)
+for building and managing cloud-native applications.
 
-![API Gateway Pattern]({% image_path coolstore-arch.png %}){:width="400px"}
+Today you are going to create, deploy and debug a containerized polyglot microservices application called CoolStore (retail online shop).
 
-#### What is Node.js?
+![CoolStore Shop]({% image_path coolstore-web.png %}){:width="500px"}
 
-Node.js is an open source, cross-platform runtime environment for developing server-side 
-applications using JavaScript. Node.js has an event-driven architecture capable of 
-non-blocking I/O. These design choices aim to optimize throughput and scalability in 
-Web applications with many input/output operations, as well as for real-time web applications.
+#### What is the architecture of this retail application?
 
-Node.js non-blocking architecture allows applications to process large number of 
-requests (tens of thousands) using a single thread which makes it desirable choice for building 
-scalable web applications.
+Several individual microservices and infrastructure components make up the CoolStore application:
 
-#### Deploy Web UI on OpenShift
+* **Catalog Service** – Java application serving products and prices for retail products.
+    * Based on [Spring Boot]({{ SPRINGBOOT_URL }}) and JBoss technologies.
+    * Running on JBoss Web Server (Tomcat).
+* **Inventory Service** – Java EE application serving inventory and availability data for retail products
+    * Based on [WildFly Swarm/Thorntail]({{ WILDFLYSWARM_URL }})
+    * Running on JBoss EAP 7.
+* **API Gateway** – Java EE application serving as an entry point/router/aggregator to the backend services (Catalog and Inventory APIs)
+    * Based on [Eclipse Vert.x]({{ ECLIPSE_VERTX_URL }})
+    * Running on JBoss EAP 7.
+* **Web UI** – A frontend web user interface
+    * Based on [AngularJS]({{ ANGULARJS_URL }}) and [PatternFly]({{ PATTERNFLY_URL }}).
+    * Running in a [Node.js]({{ NODEJS_URL }}) container.
 
-The Web UI is built using Node.js for server-side JavaScript and AngularJS for client-side 
-JavaScript. Let's deploy it on OpenShift using the certified Node.js container image available 
-in OpenShift. 
 
-In the previous labs, you used the OpenShift 
-[Source-to-Image (S2I)]({{OPENSHIFT_DOCS_BASE}}/architecture/core_concepts/builds_and_image_streams.html#source-build) 
-feature via the [Fabric8 Maven Plugin](https://maven.fabric8.io) to build a container image from the 
-source code on your laptop. In this lab, you will still use S2I but instead instruct OpenShift 
-to obtain the application code directly from the source repository and build and deploy a 
-container image of it.
+![API Gateway Pattern]({% image_path coolstore-arch.png %}){:width="500px"}
 
-The source code for the the Node.js Web front-end is available in this Git repository: 
-
-<{{WEB_NODEJS_GIT_REPO}}>
-
-Use the OpenShift CLI command to create a new build and deployment for the Web component:
-
-> Feeling adventurous? Build and deploy the Web front-end via the OpenShift Web Console 
-> instead. To give you a hint, start by clicking on **Add to project** within the 
-> **{{COOLSTORE_PROJECT}}** project and pick **JavaScript** and then **Node.js** in the service 
-> catalog. Don't forget to click on **advanced options** and set **Context Dir** to `web-nodejs` 
-> which is the sub-folder of the Git repository where the source code for Web resides.
-
-~~~shell
-$ oc new-app nodejs:8~{{LABS_GIT_REPO}} \
-        --context-dir=web-nodejs \
-        --name=web 
-~~~
-
-The `--context-dir` option specifies the sub-directly of the Git repository which contains 
-the source code for the application to be built and deployed. The `--labels` allows 
-assigning arbitrary key-value labels to the application objects in order to make it easier to 
-find them later on when you have many applications in the same project.
-
-A build gets created and starts building the Node.js Web UI container image. You can see the build 
-logs using OpenShift Web Console or OpenShift CLI:
-
-~~~shell
-$ oc logs -f bc/web
-~~~
-
-The `-f` option is to follow the logs as the build progresses. After the building the Node.s Web UI 
-completes, it gets pushed into the internal image registry in OpenShift and then deployed within 
-your project.
-
-In order to access the Web UI from outside (e.g. from a browser), it needs to get added to the load 
-balancer. Run the following command to add the Web UI service to the built-in HAProxy load balancer 
-in OpenShift.
-
-~~~shell
-$ oc expose svc/web
-$ oc get route web
-~~~
-
-Point your browser at the Web UI route url. You should be able to see the CoolStore with all 
-products and their inventory status.
-
-![CoolStore Shop]({% image_path coolstore-web.png %}){:width="840px"}
-
-Well done! You are ready to move on to the next lab.
+#### Why are you here?
+*Your mission, should you choose to accept it* is to implement the Catalog service,
+to deploy Inventory service, API Gateway service as well as the web user interface
+and to find and fix the bug into the Inventory service.
+As always should you or any member of the workshop need support or get questions, the facilitator team will be here to help you.<br/>
+Don't worry! The instructions will not self-destruct in 5 seconds so **Good Luck!** And move on to the next lab.
