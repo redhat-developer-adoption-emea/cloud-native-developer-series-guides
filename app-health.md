@@ -65,43 +65,7 @@ $ curl http://{{CATALOG_ROUTE_HOST}}/health
 {"status":"UP","diskSpace":{"status":"UP","total":3209691136,"free":2667175936,"threshold":10485760},"db":{"status":"UP","database":"H2","hello":1}}
 ~~~
 
-[WildFly Swarm health endpoints](https://wildfly-swarm.gitbooks.io/wildfly-swarm-users-guide/content/advanced/monitoring.html) function in a similar fashion and are enabled by adding `org.wildfly.swarm:monitor` 
-to the Maven project dependencies. 
-This is also already done for the Inventory service.
-
-Verify that the health endpoint works for the Inventory service using `curl`, replacing `{{INVENTORY_ROUTE_HOST}}` 
-with the Inventory route url:
-
-> You know this by know! Use `oc get route inventory` to get the Inventory route url 
-
-~~~shell
-$ curl http://{{INVENTORY_ROUTE_HOST}}/node
-
-{
-    "name" : "localhost",
-    "server-state" : "running",
-    "suspend-state" : "RUNNING",
-    "running-mode" : "NORMAL",
-    "uuid" : "79b3ffc5-d98c-4b8e-ae5c-9756ed13944a",
-    "swarm-version" : "2017.8.1"
-}
-~~~
-
-Expectedly, Eclipse Vert.x also provides a [health check module](http://vertx.io/docs/vertx-health-check/java) 
-which is enabled by adding `io.vertx:vertx-health-check` as a dependency to the Maven project. 
-
-Verify that the health endpoint works for the Inventory service using `curl`, replacing `{{API_GATEWAY_ROUTE_HOST}}` 
-with the API Gateway route url::
-
-> Yup! You can use `oc get route gateway` to get the API Gateway route url 
-
-~~~shell
-$ curl http://{{API_GATEWAY_ROUTE_HOST}}/health
-
-{"status":"UP"}
-~~~
-
-Last but not least, although you can build more sophisticated health endpoints for the Web UI as well, you 
+Although you can build more sophisticated health endpoints for the Web UI as well, you
 can use the root context ("/") of the Web UI in this lab to verify it's up and running.
 
 ####  Monitoring Catalog Service Health
@@ -117,9 +81,6 @@ $ oc get dc
 
 NAME        REVISION   DESIRED   CURRENT   TRIGGERED BY
 catalog     1          1         1         config,image(catalog:latest)
-gateway     1          1         1         config,image(gateway:latest)
-inventory   1          1         1         config,image(inventory:latest)
-web         1          1         1         config,image(web:latest)
 ~~~
 
 > `dc` stands for deployment config
@@ -163,88 +124,6 @@ health probes succeed, it is ready to receive traffic.
 > [Spring Boot](https://maven.fabric8.io/#f8-spring-boot-health-check), 
 > [WildFly Swarm](https://maven.fabric8.io/#f8-wildfly-swarm-health-check) and 
 > [Eclipse Vert.x](https://maven.fabric8.io/#f8-vertx-health-check).
-
-####  Monitoring Inventory Service Health
-
-Adding liveness and readiness probes can be done at the same time if you want to define the same health endpoint 
-and parameters for both liveness and readiness probes. 
-
-Add liveness and readiness probes to the Inventory service:
-
-~~~shell
-$ oc set probe dc/inventory --liveness --readiness --initial-delay-seconds=30 --failure-threshold=3 --get-url=http://:8080/node
-~~~
-
-OpenShift automatically restarts the Inventory pod and as soon as the health probes succeed, it is ready to receive traffic. 
-
-Using the `oc describe` command, you can get a detailed look into the deployment config and verify that the health probes are in fact 
-configured as you wanted:
-
-~~~shell
-$ oc describe dc/inventory
-
-Name:       inventory
-Namespace:  {{COOLSTORE_PROJECT}}
-...
-  Containers:
-   wildfly-swarm:
-    ...
-    Liveness:     http-get http://:8080/node delay=180s timeout=1s period=10s #success=1 #failure=3
-    Readiness:    http-get http://:8080/node delay=10s timeout=1s period=10s #success=1 #failure=3
-...
-~~~
-
-####  Monitoring API Gateway Health
-
-You are an expert in health probes by now! Add liveness and readiness probes to the API Gateway service:
-
-~~~shell
-$ oc set probe dc/gateway --liveness --readiness --initial-delay-seconds=15 --failure-threshold=3 --get-url=http://:8080/health
-~~~
-
-OpenShift automatically restarts the Inventory pod and as soon as the health probes succeed, it is 
-ready to receive traffic. 
-
-####  Monitoring Web UI Health
-
-Although you can add the liveness and health probes to the Web UI using a single CLI command, let's 
-give the OpenShift Web Console a try this time.
-
-Go the OpenShift Web Console in your browser and in the **{{COOLSTORE_PROJECT}}** project. Click on 
-**Applications >> Deployments** on the left-side bar. Click on `web` and then the **Configuration** 
-tab. You will see the warning about health checks, with a link to
-click in order to add them. Click **Add health checks** now. 
-
-> Instead of **Configuration** tab, you can directly click on **Actions** button on the top-right 
-> and then **Edit Health Checks**
-
-![Health Probes]({% image_path health-web-details.png %}){:width="900px"}
-
-You will want to click both **Add Readiness Probe** and **Add Liveness Probe** and
-then fill them out as follows:
-
-*Readiness Probe*
-
-* Path: `/`
-* Initial Delay: `10`
-* Timeout: `1`
-
-*Liveness Probe*
-
-* Path: `/`
-* Initial Delay: `180`
-* Timeout: `1`
-
-![Readiness Probe]({% image_path health-readiness.png %}){:width="700px"}
-
-![Readiness Probe]({% image_path health-liveness.png %}){:width="700px"}
-
-Click **Save** and then click the **Overview** button in the left navigation. You
-will notice that Web UI pod is getting restarted and it stays light blue
-for a while. This is a sign that the pod(s) have not yet passed their readiness
-checks and it turns blue when it's ready!
-
-![Web Redeploy]({% image_path health-web-redeploy.png %}){:width="740px"}
 
 #### Monitoring Metrics
 

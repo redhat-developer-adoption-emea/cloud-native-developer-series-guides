@@ -36,7 +36,7 @@ So far, the Catalog services have been using an in-memory H2 database. Although 
 is a convenient database to run locally on your laptop, it's in no way appropriate for production or 
 even integration tests. Since it's strongly recommended to use the same technology stack (operating 
 system, JVM, middleware, database, etc) that is used in production across all environments, you 
-should modify Inventory and Catalog services to use PostgreSQL instead of the H2 in-memory database.
+should modify the Catalog service to use PostgreSQL instead of the H2 in-memory database.
 
 Fortunately, OpenShfit supports stateful applications such as databases which require access to 
 a persistent storage that survives the container itself. You can deploy databases on OpenShift and 
