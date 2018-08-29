@@ -2,12 +2,17 @@
 
 Before we start creating and deploying our Cool Store Portal services we need to create some base resources, namely:
 
-* 1 x database for 'Inventory'
-* 1 x Database for 'Catalog'
+* 1 x Database for 'Inventory'
 
-> Before you deploy these database be sure you're in the correct namespace **{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}**
+> Before you deploy these resources be sure you're in the correct namespace: **{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}**
+> 
+~~~shell
+$ oc project
+Using project "{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}" on server "{{OPENSHIFT_CONSOLE_URL}}".
+~~~
 
 #### Inventory Database
+By default our 'Inventory' service will use PostgreSQL, so please run the following command to deploy an instance of PostgreSQL.
 
 ~~~shell
 oc new-app postgresql-persistent \
@@ -17,16 +22,5 @@ oc new-app postgresql-persistent \
     --param=POSTGRESQL_PASSWORD=inventory \
     --labels=app=inventory
 ~~~
-
-#### Catalog Database
-
-~~~shell
-oc new-app postgresql-persistent \
-    --param=DATABASE_SERVICE_NAME=catalog-postgresql \
-    --param=POSTGRESQL_DATABASE=catalog \
-    --param=POSTGRESQL_USER=catalog \
-    --param=POSTGRESQL_PASSWORD=catalog \
-    --labels=app=catalog
-~~~ 
 
 Well done! You are ready to move on to the next lab.

@@ -41,7 +41,7 @@ modules:
   - create-base-resources
 
   - create-catalog-che # add commands from module app-config and some other commands related to POD management
-  - app-config
+  - catalog-config
   - app-health
 
   - deploy-inventory

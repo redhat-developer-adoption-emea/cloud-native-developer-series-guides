@@ -10,8 +10,8 @@ modules:
     name: Introduction
   create-catalog-che:
     name: Create Catalog Service
-  app-config:
-      name: Externalize Application Configuration
+  catalog-config:
+      name: Externalize Configuration
   app-health:
       name: Monitoring Application Health
   create-base-resources:
