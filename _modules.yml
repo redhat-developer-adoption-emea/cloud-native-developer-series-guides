@@ -6,24 +6,26 @@ modules:
     name: Getting Started
   getting-started-che:
     name: Getting Started
-
   introduction:
     name: Introduction
-
   create-catalog-che:
     name: Create Catalog Service
-
+  app-config:
+      name: Externalize Application Configuration
+  app-health:
+      name: Monitoring Application Health
   create-base-resources:
     name: Create Base Resources
-
   deploy-inventory:
     name: Deploy Inventory Service
-
   deploy-gateway:
     name: Deploy Gateway Service
-
   deploy-webui:
     name: Deploy Web UI
+  debug-che:
+    name:  Debugging Inventory Service
+  env-info:
+    name: "Appendix: Lab Env Info"
 
   spring-boot:
     name: Microservices with Spring Boot
@@ -45,15 +47,9 @@ modules:
     name: Service Resilience and Fault Tolerance
   fault-tolerance-che:
     name: Service Resilience and Fault Tolerance
-  app-config:
-    name:  Application Configuration
   continuous-delivery:
     name:  Continuous Delivery
   continuous-delivery-che:
     name:  Continuous Delivery
   debug:
     name:  Debugging Applications
-  debug-che:
-    name:  Debugging Applications
-  env-info:
-    name: "Appendix: Lab Env Info"
