@@ -51,10 +51,10 @@ Let's grant permission to the API Gateway to be able to access OpenShift REST AP
 > Make sure to replace the project name with your own unique project name
 
 ~~~shell
-$ oc policy add-role-to-user view -n {{COOLSTORE_PROJECT}} -z default
+$ oc policy add-role-to-user view -n {{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}} -z default
 ~~~
 
-Next commands are going to deploy our Inventory service. Please be sure you're at {{COOLSTORE_PROJECT}} before executing them.
+Next commands are going to deploy our Inventory service. Please be sure you're at {{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}} before executing them.
 
 * **Name:** gateway
 * **S2I runtime:** redhat-openjdk18-openshift
@@ -105,9 +105,9 @@ You can see the expose DNS url for the Gateway service in the OpenShift Web Cons
 $ oc get routes
 
 NAME        HOST/PORT                                                  PATH      SERVICES    PORT       TERMINATION   
-catalog     catalog-{{COOLSTORE_PROJECT}}.roadshow.openshiftapps.com               catalog     8080                     None
-inventory   inventory-{{COOLSTORE_PROJECT}}.roadshow.openshiftapps.com             inventory   8080                     None
-gateway     gateway-{{COOLSTORE_PROJECT}}.roadshow.openshiftapps.com               gateway     8080                     None
+catalog     catalog-{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}.roadshow.openshiftapps.com               catalog     8080                     None
+inventory   inventory-{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}.roadshow.openshiftapps.com             inventory   8080                     None
+gateway     gateway-{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}.roadshow.openshiftapps.com               gateway     8080                     None
 ~~~
 
 Copy the route url for API Gateway and verify the API Gateway service works using `curl`:

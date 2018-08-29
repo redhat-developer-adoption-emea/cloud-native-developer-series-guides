@@ -2,8 +2,10 @@
 
 Before we start creating and deploying our Cool Store Portal services we need to create some base resources, namely:
 
-* Database for 'Inventory'
-* Database for 'Catalog'
+* 1 x database for 'Inventory'
+* 1 x Database for 'Catalog'
+
+> Before you deploy these database be sure you're in the correct namespace **{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}**
 
 #### Inventory Database
 

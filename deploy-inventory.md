@@ -35,7 +35,7 @@ OpenShift [Source-to-Image (S2I)]({{OPENSHIFT_DOCS_BASE}}/architecture/core_conc
 feature can be used to build a container image from a git repository. OpenShift S2I uses the [supported OpenJDK container image](https://access.redhat.com/documentation/en-us/red_hat_jboss_middleware_for_openshift/3/html/red_hat_java_s2i_for_openshift) to build the final container image of the 
 Inventory service by building the WildFly Swam uber-jar from source code (build strategy **'Source'**), using Maven, to the OpenShift platform.
 
-Next commands are going to deploy our Inventory service. Please be sure you're at {{COOLSTORE_PROJECT}} before executing them.
+Next commands are going to deploy our Inventory service. Please be sure you're at {{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}} before executing them.
 
 * **Name:** inventory
 * **S2I runtime:** redhat-openjdk18-openshift
@@ -83,7 +83,7 @@ You can see the exposed DNS url for the Inventory service in the OpenShift Web C
 $ oc get routes
 
 NAME        HOST/PORT                                        PATH       SERVICES  PORT  TERMINATION   
-inventory   inventory-{{COOLSTORE_PROJECT}}.roadshow.openshiftapps.com   inventory  8080            None
+inventory   inventory-{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}.roadshow.openshiftapps.com   inventory  8080            None
 ~~~
 
 Copy the route url for the Inventory service and verify the API Gateway service works using `curl`:

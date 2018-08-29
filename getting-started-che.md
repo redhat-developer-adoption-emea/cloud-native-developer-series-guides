@@ -99,9 +99,9 @@ For this lab, let's create a project that you will use in the following labs for
 > Make sure to follow your instructor guidance on the project names in order to have a unique project name for yourself e.g. appending your username to the project name
 
 ~~~shell
-$ oc new-project {{COOLSTORE_PROJECT}}
+$ oc new-project {{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}
 
-Now using project "{{COOLSTORE_PROJECT}}" on server ...
+Now using project "{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}" on server ...
 ...
 ~~~
 
@@ -111,6 +111,6 @@ works, open your browser and go to the OpenShift Web Console.
 
 The first screen you will see is the authentication screen. Enter your username and password and then log in. After you have authenticated to the web console, you will be presented with a list of projects that your user has permission to work with. 
 
-Click on the **{{COOLSTORE_PROJECT}}** project to be taken to the project overview page which will list all of the routes, services, deployments, and pods that you have running as part of your project. There's nothing there now, but that's about to change.
+Click on the **{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}** project to be taken to the project overview page which will list all of the routes, services, deployments, and pods that you have running as part of your project. There's nothing there now, but that's about to change.
 
 Now you are ready to get started with the labs!

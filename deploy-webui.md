@@ -22,7 +22,7 @@ The source code for the the Node.js Web front-end is available in this Git repos
 
 Use the OpenShift CLI command to create a new build and deployment for the Web component:
 
-> Feeling adventurous? Build and deploy the Web front-end via the OpenShift Web Console instead. To give you a hint, start by clicking on **Add to project** within the **{{COOLSTORE_PROJECT}}** project and pick **JavaScript** and then **Node.js** in the service catalog. Don't forget to click on **advanced options** and set **Context Dir** to `web-nodejs` which is the sub-folder of the Git repository where the source code for Web resides.
+> Feeling adventurous? Build and deploy the Web front-end via the OpenShift Web Console instead. To give you a hint, start by clicking on **Add to project** within the **{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}** project and pick **JavaScript** and then **Node.js** in the service catalog. Don't forget to click on **advanced options** and set **Context Dir** to `web-nodejs` which is the sub-folder of the Git repository where the source code for Web resides.
 
 ~~~shell
 $ oc new-app nodejs:8~{{LABS_GIT_REPO}} \
