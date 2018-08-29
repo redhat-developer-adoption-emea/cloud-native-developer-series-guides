@@ -30,9 +30,9 @@ This allows developers to build the container image for their application only o
 and reuse that image to deploy the application across various environments with 
 different configurations that are provided to the application at runtime.
 
-#### Create PostgreSQL Databases for Inventory and Catalog
+#### Create PostgreSQL Databases for Catalog
 
-So far Catalog and Inventory services have been using an in-memory H2 database. Although H2 
+So far, the Catalog services have been using an in-memory H2 database. Although H2
 is a convenient database to run locally on your laptop, it's in no way appropriate for production or 
 even integration tests. Since it's strongly recommended to use the same technology stack (operating 
 system, JVM, middleware, database, etc) that is used in production across all environments, you 
@@ -44,28 +44,12 @@ regardless of what happens to the container itself, the data is safe and can be 
 database container.
 
 Let's create a [PostgreSQL database]({{OPENSHIFT_DOCS_BASE}}/using_images/db_images/postgresql.html) 
-for the Inventory service using the PostgreSQL template that is provided out-of-the-box:
+for the Catalog service using the PostgreSQL template that is provided out-of-the-box:
 
 > [OpenShift Templates]({{OPENSHIFT_DOCS_BASE}}/dev_guide/templates.html) uses YAML/JSON to compose 
 > multiple containers and their configurations as a list of objects to be created and deployed at once hence 
 > making it simple to re-create complex deployments by just deploying a single template. Templates can 
 > be parameterized to get input for fields like service names and generate values for fields like passwords.
-
-~~~shell
-$ oc new-app postgresql-persistent \
-    --param=DATABASE_SERVICE_NAME=inventory-postgresql \
-    --param=POSTGRESQL_DATABASE=inventory \
-    --param=POSTGRESQL_USER=inventory \
-    --param=POSTGRESQL_PASSWORD=inventory \
-    --labels=app=inventory
-~~~
-
-> The `--param` parameter provides a value for the template parameters. The recommended approach is 
-> not to provide any value for username and password and allow the template to generate a random value for 
-> you due to security reasons. In this lab in order to reduce typos, a fixed value is provided for username and 
-> password.
-
-Deploy another PostgreSQL database for the Catalog service:
 
 ~~~shell
 $ oc new-app postgresql-persistent \
@@ -76,7 +60,12 @@ $ oc new-app postgresql-persistent \
     --labels=app=catalog
 ~~~
 
-Now you can move on to configure the Inventory and Catalog service to use these PostgreSQL databases.
+> The `--param` parameter provides a value for the template parameters. The recommended approach is 
+> not to provide any value for username and password and allow the template to generate a random value for 
+> you due to security reasons. In this lab in order to reduce typos, a fixed value is provided for username and 
+> password.
+
+Now you can move on to configure the Catalog service to use these PostgreSQL databases.
 
 #### Externalize WildFly Swarm (Inventory) Configuration
 
