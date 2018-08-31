@@ -27,9 +27,21 @@ The `inventory-wildfly-swarm` project has the following structure which shows th
 
 This is a minimal Java EE project with support for JAX-RS for building RESTful services and JPA for connecting to a database. [JAX-RS](https://docs.oracle.com/javaee/7/tutorial/jaxrs.htm) is one of Java EE standards that uses Java annotations to simplify the development of RESTful web services. [Java Persistence API (JPA)](https://docs.oracle.com/javaee/7/tutorial/partpersist.htm) is another Java EE standard that provides Java developers with an object/relational mapping facility for managing relational data in Java applications.
 
+#### Deploy Inventory Database
+By default our 'Inventory' service will use PostgreSQL, so please run the following command to deploy an instance of PostgreSQL.
+
+~~~shell
+oc new-app postgresql-persistent \
+    --param=DATABASE_SERVICE_NAME=inventory-postgresql \
+    --param=POSTGRESQL_DATABASE=inventory \
+    --param=POSTGRESQL_USER=inventory \
+    --param=POSTGRESQL_PASSWORD=inventory \
+    --labels=app=inventory
+~~~
+
 #### Deploy Inventory on OpenShift
 
-It’s time to build and deploy our service on OpenShift. 
+Now it’s time to build and deploy our service on OpenShift. 
 
 OpenShift [Source-to-Image (S2I)]({{OPENSHIFT_DOCS_BASE}}/architecture/core_concepts/builds_and_image_streams.html#source-build) 
 feature can be used to build a container image from a git repository. OpenShift S2I uses the [supported OpenJDK container image](https://access.redhat.com/documentation/en-us/red_hat_jboss_middleware_for_openshift/3/html/red_hat_java_s2i_for_openshift) to build the final container image of the 

@@ -23,7 +23,7 @@ modules:
   deploy-webui:
     name: Deploy Web UI
   debug-che:
-    name:  Debugging Inventory Service
+    name: Debugging Applications
   env-info:
     name: "Appendix: Lab Env Info"
 
