@@ -70,7 +70,7 @@ Note that if you have used the above workshop installer, the lab instructions ar
 
 ```
 $ oc new-app osevg/workshopper:latest --name=guides \
-    -e WORKSHOPS_URLS="https://raw.githubusercontent.com/openshift-labs/cloud-native-guides/ocp-3.10/_cloud-native-workshop.yml"
+    -e WORKSHOPS_URLS="https://raw.githubusercontent.com/redhat-developer-adoption-emea/cloud-native-reduced-guides/ocp-3.10/_cloud-native-workshop-che.yml"
 $ oc expose svc/guides
 ```
 
