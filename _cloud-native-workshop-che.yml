@@ -38,9 +38,9 @@ modules:
   - introduction
   - getting-started-che
   
-  - create-base-resources
+#  - create-base-resources
 
-  - create-catalog-che # add commands from module app-config and some other commands related to POD management
+  - create-catalog-che
   - catalog-config
   - app-health
 

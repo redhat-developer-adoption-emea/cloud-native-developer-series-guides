@@ -264,7 +264,6 @@ $ oc get routes
 
 NAME        HOST/PORT                                        PATH       SERVICES  PORT  TERMINATION   
 catalog     catalog-{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}.roadshow.openshiftapps.com     catalog    8080            None
-inventory   inventory-{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}.roadshow.openshiftapps.com   inventory  8080            None
 ~~~
 
 Copy the route url for the Catalog service and verify the Catalog service works using `curl`:

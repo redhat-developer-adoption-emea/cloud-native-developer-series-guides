@@ -40,7 +40,7 @@ determined based on the return value (0 is success).
 only if the check can establish a connection. TCP socket check is ideal for applications that do not 
 start listening until initialization is complete.
  
-Let's add health probes to the microservices deployed so far.
+Let's add health probes to the Catalog service deployed so far.
 
 ####  Explore Health REST Endpoints
 
@@ -52,7 +52,7 @@ database connection health, backoffice system availability, etc).
 [Spring Boot Actuator](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready) is a 
 sub-project of Spring Boot which adds health and management HTTP endpoints to the application. Enabling Spring Boot 
 Actuator is done via adding `org.springframework.boot:spring-boot-starter-actuator` dependency to the Maven project 
-dependencies which is already done for the Catalog services.
+dependencies which is already done for the Catalog service.
 
 Verify that the health endpoint works for the Catalog service using `curl`, replacing `{{CATALOG_ROUTE_HOST}}` 
 with the Catalog route url:
@@ -79,8 +79,9 @@ deployment configs in the project.
 ~~~shell
 $ oc get dc
 
-NAME        REVISION   DESIRED   CURRENT   TRIGGERED BY
-catalog     1          1         1         config,image(catalog:latest)
+NAME                 REVISION   DESIRED   CURRENT   TRIGGERED BY
+catalog              1          1         1         config,image(catalog:latest)
+catalog-postgresql   1          1         1         config,image(postgresql:9.6)
 ~~~
 
 > `dc` stands for deployment config
@@ -116,7 +117,7 @@ the liveness probe.
 $ oc set probe dc/catalog --readiness --initial-delay-seconds=30 --failure-threshold=3 --get-url=http://:8080/health 
 ~~~
 
-Viola! OpenShift automatically restarts the Catalog pod and as soon as the 
+Voila! OpenShift automatically restarts the Catalog pod and as soon as the
 health probes succeed, it is ready to receive traffic. 
 
 > Fabric8 Maven Plugin can also be configured to automatically set the health probes when running `fabric8:deploy` 

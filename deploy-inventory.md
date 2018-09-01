@@ -95,6 +95,7 @@ You can see the exposed DNS url for the Inventory service in the OpenShift Web C
 $ oc get routes
 
 NAME        HOST/PORT                                        PATH       SERVICES  PORT  TERMINATION   
+catalog     catalog-{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}.roadshow.openshiftapps.com     catalog    8080
 inventory   inventory-{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}.roadshow.openshiftapps.com   inventory  8080            None
 ~~~
 
@@ -107,7 +108,5 @@ $ curl http://{{INVENTORY_ROUTE_HOST}}/api/inventory/329299
 
 {"itemId":"329299","quantity":35}
 ~~~
-
-> TODO: RE	VIEW WHY IS THIS SO IMPORTANT! IF THIS TEST IS NOT RUN BEFORE  curl http://gateway-coolstore-user1.apps.madrid.openshiftworkshop.com/api/products {"error":"Connection was closed"}cvicensa-mbp:cloud-native-reduced-labs cvicensa$ curl http://gateway-coolstore user1.apps.madrid.openshiftworkshop.com/api/products {"error":"Connection refused: /172.30.196.227:8080"}c
 
 Well done! You are ready to move on to the next lab.

@@ -5,25 +5,25 @@ modules:
   getting-started:
     name: Getting Started
   getting-started-che:
-    name: Getting Started
+    name: Getting Started (20 min)
   introduction:
-    name: Introduction
+    name: Introduction (5 min)
   create-catalog-che:
-    name: Create Catalog Service
+    name: Create Catalog Service (35 min)
   catalog-config:
-      name: Externalize Configuration
+      name: Externalize Configuration (20 min)
   app-health:
-      name: Monitoring Application Health
+      name: Monitoring Application Health (20 min)
   create-base-resources:
     name: Create Base Resources
   deploy-inventory:
-    name: Deploy Inventory Service
+    name: Deploy Inventory Service (15 min)
   deploy-gateway:
-    name: Deploy Gateway Service
+    name: Deploy Gateway Service (10 min)
   deploy-webui:
-    name: Deploy Web UI
+    name: Deploy Web UI (10 min)
   debug-che:
-    name: Debugging Applications
+    name: Debugging Applications (15 min)
   env-info:
     name: "Appendix: Lab Env Info"
 

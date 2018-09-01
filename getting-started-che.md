@@ -1,6 +1,6 @@
 ## Getting Started with OpenShift
 
-In this lab you will get familiar with the OpenShift CLI and OpenShift Web Console and get ready for the Cloud Native Roadshow labs.
+In this lab you will get familiar with the OpenShift CLI and OpenShift Web Console and get ready for the Cloud Native Developer Series labs.
 
 For completing the following labs, you can either use your own workstation or as an alternative, Eclipse Che web IDE. The advantage of your own workstation is that you use the environment that you are familiar with while the advantage of Eclipse Che is that all tools needed (Maven, Git, OpenShift CLI, etc ) are pre-installed in it (not on your workstation!) and all interactions takes place within the browser which removes possible internet speed issues and version incompatibilities on your workstation.
 

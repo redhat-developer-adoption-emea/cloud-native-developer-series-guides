@@ -32,7 +32,7 @@ different configurations that are provided to the application at runtime.
 
 #### Create PostgreSQL Databases for Catalog
 
-So far, the Catalog services have been using an in-memory H2 database. Although H2
+So far, the Catalog service has been using an in-memory H2 database. Although H2
 is a convenient database to run locally on your laptop, it's in no way appropriate for production or 
 even integration tests. Since it's strongly recommended to use the same technology stack (operating 
 system, JVM, middleware, database, etc) that is used in production across all environments, you 
