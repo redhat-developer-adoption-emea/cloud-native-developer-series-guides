@@ -5,7 +5,7 @@ modules:
   getting-started:
     name: Getting Started
   getting-started-che:
-    name: Getting Started (20 min)
+    name: Getting Started (15 min)
   introduction:
     name: Introduction (5 min)
   create-catalog-che:
@@ -17,7 +17,7 @@ modules:
   create-base-resources:
     name: Create Base Resources
   deploy-inventory:
-    name: Deploy Inventory Service (15 min)
+    name: Deploy Inventory Service (10 min)
   deploy-gateway:
     name: Deploy Gateway Service (10 min)
   deploy-webui:

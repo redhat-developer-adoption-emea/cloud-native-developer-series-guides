@@ -70,36 +70,7 @@ $ oc new-app redhat-openjdk18-openshift:1.4~{{LABS_GIT_REPO}} \
 $ oc expose svc/gateway
 ~~~
 
-Once this completes, your project should be up and running. OpenShift runs the different components of the project in one or more pods which are the unit of runtime deployment and consists of the running 
-containers for the project. 
-
-Let's take a moment and review the OpenShift resources that are created for the API Gateway:
-
-* **Build Config**: `gateway` build config is the configuration for building the Gateway 
-container image from the gateway source code or JAR archive
-* **Image Stream**: `gateway` image stream is the virtual view of all gateway container 
-images built and pushed to the OpenShift integrated registry.
-* **Deployment Config**: `gateway` deployment config deploys and redeploys the Gateway container 
-image whenever a new Gateway container image becomes available
-* **Service**: `gateway` service is an internal load balancer which identifies a set of pods (containers) in order to proxy the connections it receives to them. Backing pods can be added to or removed from a service arbitrarily while the service remains consistently available, 
-enabling anything that depends on the service to refer to it at a consistent address (service name or IP).
-* **Route**: `gateway` route registers the service on the built-in external load-balancer and assigns a public DNS name to it so that it can be reached from outside OpenShift cluster.
-
-You can review the above resources in the OpenShift Web Console or using `oc describe` command:
-
-> `bc` is the short-form of `buildconfig` and can be interchangeably used instead of it with the
-> OpenShift CLI. The same goes for `is` instead of `imagestream`, `dc` instead of`deploymentconfig` 
-> and `svc` instead of `service`.
-
-~~~shell
-$ oc describe bc gateway
-$ oc describe is gateway
-$ oc describe dc gateway
-$ oc describe svc gateway
-$ oc describe route gateway
-~~~
-
-You can see the expose DNS url for the Gateway service in the OpenShift Web Console or using OpenShift CLI.
+Once this completes, your project should be up and running. You can see the expose DNS url for the Gateway service in the OpenShift Web Console or using OpenShift CLI.
 
 ~~~shell
 $ oc get routes

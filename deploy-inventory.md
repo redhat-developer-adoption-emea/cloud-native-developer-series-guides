@@ -63,39 +63,12 @@ $ oc new-app redhat-openjdk18-openshift:1.4~{{LABS_GIT_REPO}} \
 $ oc expose svc/inventory
 ~~~
 
-Once this completes, your project should be up and running. OpenShift runs the different components of the project in one or more pods which are the unit of runtime deployment and consists of the running 
-containers for the project. 
-
-Let's take a moment and review the OpenShift resources that are created for the Inventory REST API:
-
-* **Build Config**: `inventory` build config is the configuration for building the Inventory container image from the inventory source code
-* **Image Stream**: `inventory` image stream is the virtual view of all inventory container images built and pushed to the OpenShift integrated registry.
-* **Deployment Config**: `inventory` deployment config deploys and redeploys the Inventory container image whenever a new Inventory container image becomes available
-* **Service**: `inventory` service is an internal load balancer which identifies a set of pods (containers) in order to proxy the connections it receives to them. Backing pods can be added to or removed from a service arbitrarily while the service remains consistently available, 
-enabling anything that depends on the service to refer to it at a consistent address (service name or IP).
-* **Route**: `inventory` route registers the service on the built-in external load-balancer and assigns a public DNS name to it so that it can be reached from outside OpenShift cluster.
-
-You can review the above resources in the OpenShift Web Console or using `oc describe` command:
-
-> `bc` is the short-form of `buildconfig` and can be interchangeably used 
-> instead of it with the OpenShift CLI. The same goes for `is` instead 
-> of `imagestream`, `dc` instead of `deploymentconfig` and `svc` instead of `service`.
+Once this completes, your project should be up and running. You can see the exposed DNS url for the Inventory service in the OpenShift Web Console or using OpenShift CLI:
 
 ~~~shell
-$ oc describe bc inventory
-$ oc describe is inventory
-$ oc describe dc inventory
-$ oc describe svc inventory
-$ oc describe route inventory
-~~~
+$ oc get routes inventory
 
-You can see the exposed DNS url for the Inventory service in the OpenShift Web Console or using OpenShift CLI:
-
-~~~shell
-$ oc get routes
-
-NAME        HOST/PORT                                        PATH       SERVICES  PORT  TERMINATION   
-catalog     catalog-{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}.roadshow.openshiftapps.com     catalog    8080
+NAME        HOST/PORT                                        PATH       SERVICES  PORT  TERMINATION
 inventory   inventory-{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}.roadshow.openshiftapps.com   inventory  8080            None
 ~~~
 

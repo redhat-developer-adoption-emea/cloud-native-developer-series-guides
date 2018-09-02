@@ -37,25 +37,11 @@ modules:
   activate:
   - introduction
   - getting-started-che
-  
-#  - create-base-resources
-
   - create-catalog-che
   - catalog-config
-  - app-health
-
+#  - app-health # To enable if time permits it
   - deploy-inventory
   - deploy-gateway
   - deploy-webui
-
-  #- spring-boot-che # add commands from module app-config and some other commands related to POD management
-  #- wildfly-swarm-che
-  #- vertx-che
-  #- nodejs
-
-
-  #- fault-tolerance-che
-
-  #- continuous-delivery-che
   - debug-che
   - env-info

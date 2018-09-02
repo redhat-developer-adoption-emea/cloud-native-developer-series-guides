@@ -32,6 +32,6 @@ Several individual microservices and infrastructure components make up the CoolS
 #### Why are you here?
 *"Your mission, should you choose to accept it"* is to implement the Catalog service,
 to deploy it as well as the Inventory service, the API Gateway service and the web user interface
-and to find and fix the bug into the Inventory service.
+and to investigate bugs and issues using remote debugging technique.
 As always should you or any member of the workshop need support or get questions, the facilitator team is here to help you.<br/>
 Don't worry! The instructions will not self-destruct in 5 seconds so **Good Luck!** And move on to the next lab.
