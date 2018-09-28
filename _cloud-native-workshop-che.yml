@@ -39,9 +39,9 @@ modules:
   - getting-started-che
   - create-catalog-che
   - catalog-config
-#  - app-health # To enable if time permits it
   - deploy-inventory
   - deploy-gateway
   - deploy-webui
   - debug-che
   - env-info
+#  - app-health # To enable if time permits it

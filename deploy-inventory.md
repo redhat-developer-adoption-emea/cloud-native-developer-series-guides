@@ -4,6 +4,8 @@ As explained in the introduction we need an Inventory service as part of the Coo
 
 We're going to save time by deploying the 'inventory' service instead of coding it. But before we actually deploy the service we're going to explain briefly some concepts.
 
+![CoolStore Architecture]({% image_path coolstore-arch-inventory.png %}){:width="400px"}
+
 #### Technology
 
 Our **'Inventory'** service has been implemented as a Java EE Microprofile application mainly using JAX-RS (REST) and JPA (persistency). Red Hat Openshift provides several runtimes to build services using Node.js, Java, C#, etc. Given that the service is implemented using Java EE Microprofile technology we're going to use  WildFly Swarm runtime. 
@@ -47,7 +49,7 @@ OpenShift [Source-to-Image (S2I)]({{OPENSHIFT_DOCS_BASE}}/architecture/core_conc
 feature can be used to build a container image from a git repository. OpenShift S2I uses the [supported OpenJDK container image](https://access.redhat.com/documentation/en-us/red_hat_jboss_middleware_for_openshift/3/html/red_hat_java_s2i_for_openshift) to build the final container image of the 
 Inventory service by building the WildFly Swam uber-jar from source code (build strategy **'Source'**), using Maven, to the OpenShift platform.
 
-Next commands are going to deploy our Inventory service. Please be sure you're at {{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}} before executing them.
+Next commands are going to deploy our Inventory service.
 
 * **Name:** inventory
 * **S2I runtime:** redhat-openjdk18-openshift
@@ -74,7 +76,7 @@ inventory   inventory-{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}.roadshow.openshif
 
 Copy the route url for the Inventory service and verify the API Gateway service works using `curl`:
 
-> The route urls in your project would be different from the ones in this lab guide! Use the one from yor project.
+> The route urls in your project would be different from the ones in this lab guide! Use the one from your project.
 
 ~~~shell
 $ curl http://{{INVENTORY_ROUTE_HOST}}/api/inventory/329299

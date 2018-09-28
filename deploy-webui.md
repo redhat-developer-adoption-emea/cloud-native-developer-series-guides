@@ -2,7 +2,7 @@
 
 In this lab you will learn about Node.js and will deploy the Node.js and Angular-based web front+end for the CoolStore online shop which uses the API Gateway services you deployed in previous labs. 
 
-![API Gateway Pattern]({% image_path coolstore-arch.png %}){:width="400px"}
+![CoolStore Architecture]({% image_path coolstore-arch-webui.png %}){:width="400px"}
 
 #### What is Node.js?
 
@@ -22,7 +22,7 @@ The source code for the the Node.js Web front-end is available in this Git repos
 
 Use the OpenShift CLI command to create a new build and deployment for the Web component:
 
-> Feeling adventurous? Build and deploy the Web front-end via the OpenShift Web Console instead. To give you a hint, start by clicking on **Add to project** within the **{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}** project and pick **JavaScript** and then **Node.js** in the service catalog. Don't forget to click on **advanced options** and set **Context Dir** to `web-nodejs` which is the sub-folder of the Git repository where the source code for Web resides.
+> Feeling adventurous? Build and deploy the Web front-end via the OpenShift Web Console instead. To give you a hint, start by clicking on **Catalog** in the left side menu within the **{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}** project then under **Languages** tab, pick **JavaScript** and then **Node.js**. Don't forget to click on **advanced options** and set **Context Dir** to `web-nodejs` which is the sub-folder of the Git repository where the source code for Web resides.
 
 ~~~shell
 $ oc new-app nodejs:8~{{LABS_GIT_REPO}} \
@@ -30,7 +30,7 @@ $ oc new-app nodejs:8~{{LABS_GIT_REPO}} \
         --name=web 
 ~~~
 
-The `--context-dir` option specifies the sub-directly of the Git repository which contains the source code for the application to be built and deployed. The `--labels` allows assigning arbitrary key-value labels to the application objects in order to make it easier to find them later on when you have many applications in the same project.
+The `--context-dir` option specifies the sub-directly of the Git repository which contains the source code for the application to be built and deployed.
 
 A build gets created and starts building the Node.js Web UI container image. You can see the build logs using OpenShift Web Console or OpenShift CLI:
 

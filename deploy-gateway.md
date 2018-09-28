@@ -4,11 +4,11 @@ As explained in the introduction at the core of the Cool Store Portal architectu
 
 As we have done previously for the sake of saving time we're going to deploy our 'Gateway' service instead of coding it. But before we actually deploy the service we're going to explain briefly some concepts.
 
+![CoolStore Architecture]({% image_path coolstore-arch-gateway.png %}){:width="400px"}
+
 #### Technology
 
 Our **'API Gateway'** service needed to be easy to scale, light and responsive, these are some of the reasons why we have implemented it as a Vert.x verticle.
-
-> One of the runtimes supported by Red Hat Openshift is Vert.x. 
 
 #### What is Eclipse Vert.x?
 
@@ -46,15 +46,7 @@ Inventory service by building the WildFly Swam uber-jar from source code (build 
 
 Vert.x service discovery integrates into OpenShift service discovery via OpenShift REST API and imports available services to make them available to the Vert.x application. Security in OpenShift comes first and therefore accessing the OpenShift REST API requires the user or the system (Vert.x in this case) to have sufficient permissions to do so. All containers in OpenShift run with a `serviceaccount` (by default, the project `default` service account) which can be used to grant permissions for operations like accessing the OpenShift REST API. You can read more about service accounts in the [OpenShift Documentation]({{OPENSHIFT_DOCS_BASE}}/dev_guide/service_accounts.html) and this [blog post](https://blog.openshift.com/understanding-service-accounts-sccs/#_service_accounts)
 
-Let's grant permission to the API Gateway to be able to access OpenShift REST API and discover services.
-
-> Make sure to replace the project name with your own unique project name
-
-~~~shell
-$ oc policy add-role-to-user view -n {{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}} -z default
-~~~
-
-Next commands are going to deploy our Inventory service. Please be sure you're at {{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}} before executing them.
+Next commands are going to deploy our API Gateway service.
 
 * **Name:** gateway
 * **S2I runtime:** redhat-openjdk18-openshift
@@ -83,7 +75,7 @@ gateway     gateway-{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}.roadshow.openshifta
 
 Copy the route url for API Gateway and verify the API Gateway service works using `curl`:
 
-> The route urls in your project would be different from the ones in this lab guide! Use the ones from yor project.
+> The route urls in your project would be different from the ones in this lab guide! Use the ones from your project.
 
 ~~~shell
 $ curl http://{{API_GATEWAY_ROUTE_HOST}}/api/products

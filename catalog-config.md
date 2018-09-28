@@ -118,12 +118,11 @@ and discovery is a privilege that needs to be granted to containers in each proj
 
 Since you do want Spring Boot to discover the config maps inside the `{{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}}` project, you 
 need to grant permission to the Spring Boot service account to access the OpenShift REST API and find the 
-config maps. However you have done this already in previous labs and no need to grant permission again. 
+config maps.
 
-> For the record, you can grant permission to the default service account in your project using this 
-command: 
-> 
->     $ oc policy add-role-to-user view -n {{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}} -z default
+~~~shell
+$ oc policy add-role-to-user view -n {{COOLSTORE_PROJECT}}-{{OPENSHIFT_USER}} -z default
+~~~
 
 Delete the Catalog container to make it start again and look for the config maps:
 
