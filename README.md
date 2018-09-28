@@ -9,7 +9,7 @@ Agenda
 * Configuration Management
 * Deploying Java EE services with WildFly Swarm
 * Deploying Reactive Services with Vert.x
-* Deploying Reactive Services with Node.js
+* Deploying Web Services with Node.js
 * Debugging Services
 
 Install Workshop Infrastructure
@@ -51,10 +51,9 @@ oc run apb --restart=Never --image="openshiftapb/cloudnative-workshop-apb:ocp-3.
 Or if you have Ansible installed locally, you can also run the Ansilbe playbooks directly on your machine:
 
 ```
-oc login
-oc new-project lab-infra
-
-ansible-playbook -vvv playbooks/provision.yml \
+$ oc login
+$ oc new-project lab-infra
+$ ansible-playbook -vvv playbooks/provision.yml \
        -e namespace=$(oc project -q) \
        -e openshift_token=$(oc whoami -t) \
        -e openshift_master_url=$(oc whoami --show-server)
@@ -63,8 +62,12 @@ ansible-playbook -vvv playbooks/provision.yml \
 Lab Instructions on OpenShift
 ===
 
-Note that if you have used the above workshop installer, the lab instructions are already deployed.
+Note that if you have used the above workshop installer, the lab instructions just need to be updated the guides application.
+```
+$ oc set env dc/guides -n lab-infra WORKSHOPS_URLS="https://raw.githubusercontent.com/redhat-developer-adoption-emea/cloud-native-developer-series-guides/ocp-3.10/_cloud-native-workshop-che.yml" CONTENT_URL_PREFIX="https://raw.githubusercontent.com/redhat-developer-adoption-emea/cloud-native-developer-series-guides/ocp-3.10" 
+```
 
+Otherwise, run the following command:
 ```
 $ oc new-app osevg/workshopper:latest --name=guides \
     -e WORKSHOPS_URLS="https://raw.githubusercontent.com/redhat-developer-adoption-emea/cloud-native-developer-series-guides/ocp-3.10/_cloud-native-workshop-che.yml"
