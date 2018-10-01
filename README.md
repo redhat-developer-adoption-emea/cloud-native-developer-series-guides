@@ -64,12 +64,12 @@ Lab Instructions on OpenShift
 
 Note that if you have used the above workshop installer, the lab instructions just need to be updated the guides application.
 ```
-$ oc set env dc/guides -n lab-infra WORKSHOPS_URLS="https://raw.githubusercontent.com/redhat-developer-adoption-emea/cloud-native-developer-series-guides/ocp-3.10/_cloud-native-workshop-che.yml" CONTENT_URL_PREFIX="https://raw.githubusercontent.com/redhat-developer-adoption-emea/cloud-native-developer-series-guides/ocp-3.10" 
+$ oc set env dc/guides-che -n lab-infra WORKSHOPS_URLS="https://raw.githubusercontent.com/redhat-developer-adoption-emea/cloud-native-developer-series-guides/ocp-3.10/_cloud-native-workshop-che.yml" CONTENT_URL_PREFIX="https://raw.githubusercontent.com/redhat-developer-adoption-emea/cloud-native-developer-series-guides/ocp-3.10" 
 ```
 
 Otherwise, run the following command:
 ```
-$ oc new-app osevg/workshopper:latest --name=guides \
+$ oc new-app osevg/workshopper:latest --name=guides-che \
     -e WORKSHOPS_URLS="https://raw.githubusercontent.com/redhat-developer-adoption-emea/cloud-native-developer-series-guides/ocp-3.10/_cloud-native-workshop-che.yml"
 $ oc expose svc/guides
 ```

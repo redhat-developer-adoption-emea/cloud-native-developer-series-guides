@@ -193,7 +193,7 @@ Build and package the Catalog service using Maven by clicking on **BUILD > build
 
 Using Spring Boot maven plugin, you can conveniently run the application in Eclipse Che and test the endpoint. In Eclipse Che, click on the run icon and then on **run spring-boot**. 
 
-> You can also run the inventory service in Eclipse Che using the commands palette and then **run > run spring-boot**
+> You can also run the Catalog service in Eclipse Che using the commands palette and then **run > run spring-boot**
  
 When you see `Started CatalogApplication` in the logs, you can access the Catalog REST API. Let’s test it out using `curl` in a new terminal window:
 

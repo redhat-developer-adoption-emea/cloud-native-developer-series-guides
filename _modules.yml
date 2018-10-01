@@ -13,9 +13,9 @@ modules:
   deploy-inventory:
     name: Deploy Inventory Service (10 min)
   deploy-gateway:
-    name: Deploy Gateway Service (10 min)
+    name: Deploy Gateway Service (5 min)
   deploy-webui:
-    name: Deploy Web UI (10 min)
+    name: Deploy Web UI (5 min)
   debug-che:
     name: Debugging Applications (15 min)
   env-info:
