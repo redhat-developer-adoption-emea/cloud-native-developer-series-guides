@@ -31,9 +31,8 @@ SEVERE: Inventory error for 444436: null
 Oh! Something seems to be wrong with the response the API Gateway has received from the 
 Inventory API for the product id `444436`. 
 
-Look into the Inventory pod logs to investigate further and see if you can find more  
+Look into the Inventory pod logs to investigate further and see if you can find more 
 information about this bug:
-
 
 ~~~shell
 $ oc logs dc/inventory | grep ERROR

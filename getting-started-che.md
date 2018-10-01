@@ -64,7 +64,9 @@ Choose **Maven** from the project configurations and then click on **Save**
 
 ![Eclipse Che - Convert to Project]({% image_path bootstrap-che-maven.png %}){:width="700px"}
 
-Note the **Terminal** window in Eclipse Che. For the rest of these labs, anytime you need to run a command in a terminal, you can use the Eclipse Che **Terminal** window.
+Repeat the above for **inventory-wildfly-swarm** and **gateway-vertx** projects.
+
+> Note the **Terminal** window in Eclipse Che. For the rest of these labs, anytime you need to run a command in a terminal, you can use the Eclipse Che **Terminal** window.
 
 ![Eclipse Che - Terminal]({% image_path bootstrap-che-terminal.png %})
 

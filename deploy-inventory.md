@@ -49,21 +49,24 @@ OpenShift [Source-to-Image (S2I)]({{OPENSHIFT_DOCS_BASE}}/architecture/core_conc
 feature can be used to build a container image from a git repository. OpenShift S2I uses the [supported OpenJDK container image](https://access.redhat.com/documentation/en-us/red_hat_jboss_middleware_for_openshift/3/html/red_hat_java_s2i_for_openshift) to build the final container image of the 
 Inventory service by building the WildFly Swam uber-jar from source code (build strategy **'Source'**), using Maven, to the OpenShift platform.
 
-Next commands are going to deploy our Inventory service.
+To build and deploy the Inventory service on OpenShift using the `fabric8` maven plugin, 
+which is already configured in Eclipse Che, from the commands palette, click on **DEPLOY > fabric8:deploy**
 
-* **Name:** inventory
-* **S2I runtime:** redhat-openjdk18-openshift
-* **Image tag:** 1.4
-* **Repository:** {{LABS_GIT_REPO}}
-* **Context Directory:** inventory-wildfly-swarm
+![Fabric8 Deploy]({% image_path eclipse-che-commands-deploy.png %}){:width="340px"}
 
-~~~shell
-$ oc new-app redhat-openjdk18-openshift:1.4~{{LABS_GIT_REPO}} \
-        --context-dir=inventory-wildfly-swarm \
-        --name=inventory
 
-$ oc expose svc/inventory
-~~~
+During the deployment, you might see that Fabric8 Maven Plugin throws an `java.util.concurrent.RejectedExecutionException` 
+exception. This is due to [a bug](https://github.com/fabric8io/kubernetes-client/issues/1035) in one of Fabric8 Maven Plugin 
+dependencies which is being worked on right now and will be fixed soon. You can ignore this exception for now. The deployment 
+nevertheless succeeds.
+
+![Inventory Deployed]({% image_path wfswarm-inventory-che-deployed.png %}){:width="800px"}
+
+`fabric8:deploy` will cause the following to happen:
+
+* The Inventory uber-jar is built using WildFly Swarm
+* A container image is built on OpenShift containing the Inventory uber-jar and JDK
+* All necessary objects are created within the OpenShift project to deploy the Inventory service
 
 Once this completes, your project should be up and running. You can see the exposed DNS url for the Inventory service in the OpenShift Web Console or using OpenShift CLI:
 
