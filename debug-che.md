@@ -174,82 +174,6 @@ returned instead of `null`.
 Click on the _Resume_ icon to continue the code execution and then on the stop icon to 
 end the debug session.
 
-#### Create a Git Repository for Inventory
-
-Before fixing the bug, you need to create your own Git Repository for Inventory to modify the source code and deploy the fixed version of the service.
-
-You can use any Git server (e.g. GitHub, BitBucket, etc) for this lab but we have prepared a 
-Gogs git server which you can access here: 
-
-{{ GIT_URL }}
-
-Click on **Register** to register a new user with the following details and then click on 
-**Create New Account**: 
-
-* Username: _same as your OpenShift user_
-* Email: *your email*  (Don't worry! Gogs won't send you any emails)
-* Password: `openshift`
-
-![Sign Up Gogs]({% image_path cd-gogs-signup.png %}){:width="900px"}
-
-You will be redirected to the sign in page. Sign in using the above username and password.
-
-Click on the plus icon on the top navigation bar and then on **New Repository**.
-
-![Create New Repository]({% image_path cd-gogs-plus-icon.png %}){:width="900px"}
-
-Give `inventory-wildfly-swarm` as **Repository Name** and click on **Create Repository** 
-button, leaving the rest with default values.
-
-![Create New Repository]({% image_path cd-gogs-new-repo.png %}){:width="700px"}
-
-The Git repository is created now. 
-
-Click on the copy-to-clipboard icon to near the 
-HTTP Git url to copy it to the clipboard which you will need in a few minutes.
-
-![Empty Repository]({% image_path cd-gogs-empty-repo.png %}){:width="900px"}
-
-#### Push Inventory Code to the Git Repository
-
-Now that you have a Git repository for the Inventory service, you should push the 
-source code into this Git repository.
-
-Go the `inventory-wildfly-swarm` folder, initialize it as a Git working copy and add 
-the GitHub repository as the remote repository for your working copy. 
-
-> Replace `GIT-REPO-URL` with the Git repository url copied in the previous steps
-
-~~~shell
-$ cd labs/inventory-wildfly-swarm
-$ git init
-$ git remote add origin GIT-REPO-URL
-~~~
-
-
-Before you commit the source code to the Git repository, configure your name and 
-email so that the commit owner can be seen on the repository. If you want, you can 
-replace the name and the email with your own in the following commands:
-
-~~~shell
-git config --global user.name "Developer"
-git config --global user.email "developer@me.com"
-~~~
-
-Commit and push the existing code to the GitHub repository.
-
-~~~shell
-$ git add . --all
-$ git commit -m "initial add"
-$ git push -u origin master
-~~~
-
-Enter your Git repository username and password if you get asked to enter your credentials. Go 
-to your `inventory-wildfly-swarm` repository web interface and refresh the page. You should 
-see the project files in the repository.
-
-![Inventory Repository]({% image_path cd-gogs-inventory-repo.png %}){:width="900px"}
-
 #### Fix the Inventory Bug
 
 Edit the `InventoryResource.java` add update the `getAvailability()` to make it look like the following 
@@ -275,20 +199,13 @@ public Inventory getAvailability(@PathParam("itemId") String itemId) {
 
 Go back to the **Terminal** window where `fabric8:debug` was running. Press 
 `Ctrl+C` to stop the debug and port-forward and then run the following commands 
-to commit the changes to the Git repository.
+to build and deploy the fixed version of Inventory service.
 
 ~~~shell
-$ git add src/main/java/com/redhat/cloudnative/inventory/InventoryResource.java
-$ git commit -m "inventory returns zero for non-existing product id" 
-$ git push origin master
+$ mvn fabric8:deploy
 ~~~
 
-As soon as you commit the changes to the Git repository, the `inventory-pipeline` gets 
-triggered to build and deploy a new Inventory container with the fix. Go to the 
-OpenShift Web Console and inside the **{{COOLSTORE_PROJECT}}** project. On the sidebar 
-menu, Click on **Builds >> Pipelines** to see its progress.
-
-When the pipeline completes successfully, point your browser at the Web route and verify 
+When this completes successfully, point your browser at the Web route and verify 
 that the inventory status is visible for all products. The suspect product should show 
 the inventory status as _Not in Stock_.
 
