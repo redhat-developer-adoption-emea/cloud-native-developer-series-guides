@@ -38,7 +38,28 @@ Although you can have multiple, there is currently only one Verticle created in 
 
 #### Deploying our API Gateway on OpenShift
 
-It’s time to build and deploy our service on OpenShift. 
+It’s time to deploy our service on OpenShift. 
+
+The API Gateway is using [Vert.x service discovery](http://vertx.io/docs/vertx-service-discovery/java) for finding where dependent services are deployed 
+and accessing their endpoints. This service discovery can seamlessly integrated with external 
+service discovery mechanisms provided by OpenShift, Kubernetes, Consul, Redis, etc.
+
+[Vert.x service discovery](http://vertx.io/docs/vertx-service-discovery/java) integrates into OpenShift service discovery via OpenShift 
+REST API and imports available services to make them available to the Vert.x application. Security 
+in OpenShift comes first and therefore accessing the OpenShift REST API requires the user or the 
+system (Vert.x in this case) to have sufficient permissions to do so. All containers in 
+OpenShift run with a `serviceaccount` (by default, the project `default` service account) which can 
+be used to grant permissions for operations like accessing the OpenShift REST API. You can read 
+more about service accounts in the [OpenShift Documentation]({{OPENSHIFT_DOCS_BASE}}/dev_guide/service_accounts.html) and this 
+[blog post](https://blog.openshift.com/understanding-service-accounts-sccs/#_service_accounts)
+
+Grant permission to the API Gateway to be able to access OpenShift REST API and discover services.
+
+> Make sure to replace the project name with your own unique project name
+
+~~~shell
+$ oc policy add-role-to-user view -n {{COOLSTORE_PROJECT}} -z default
+~~~ 
 
 OpenShift [Source-to-Image (S2I)]({{OPENSHIFT_DOCS_BASE}}/architecture/core_concepts/builds_and_image_streams.html#source-build) 
 feature can be used to build a container image from a git repository. OpenShift S2I uses the [supported OpenJDK container image](https://access.redhat.com/documentation/en-us/red_hat_jboss_middleware_for_openshift/3/html/red_hat_java_s2i_for_openshift) to build the final container image of the 
